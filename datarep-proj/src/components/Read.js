@@ -1,4 +1,4 @@
-import './read.css';
+import './Read.css';
 
 const Read = () => {
   const recipes = [
