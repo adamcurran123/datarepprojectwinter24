@@ -1,10 +1,19 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './Read.css';
+import axios from 'axios';
 
-const Read = ({ recipes }) => {
+const Read = () => {
+    const [recipes, setRecipes] = useState([]);
+
     useEffect(() => {
-        console.log("Updated recipes:", recipes);
-    }, [recipes]);
+        axios.get('http://localhost:4000/api/recipes')
+            .then((response) => {
+                setRecipes(response.data);
+            })
+            .catch((error) => {
+                console.error("Error fetching recipes:", error);
+            });
+    }, []);
 
     return (
         <div>

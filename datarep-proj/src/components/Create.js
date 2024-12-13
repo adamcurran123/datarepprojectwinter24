@@ -1,20 +1,28 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-
-const Create = ({ addRecipe }) => {
+const Create = () => {
     const [recipeName, setRecipeName] = useState('');
     const [recipeDescription, setRecipeDescription] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (recipeName && recipeDescription) {
-            addRecipe({ name: recipeName, description: recipeDescription });
-            setRecipeName('');
-            setRecipeDescription('');
-            navigate('/read');
-        }
+
+        const recipe = {
+            name: recipeName,
+            description: recipeDescription,
+        };
+
+        axios.post('http://localhost:4000/api/recipes', recipe)
+            .then((res) => {
+                console.log(res.data);
+                setRecipeName('');
+                setRecipeDescription('');
+                navigate('/read');
+            })
+            .catch((err) => console.error(err));
     };
 
     return (
