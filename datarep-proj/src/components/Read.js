@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import './Read.css';
 import axios from 'axios';
+import './MasterStyle.css';
 
 const Read = () => {
     const [recipes, setRecipes] = useState([]);

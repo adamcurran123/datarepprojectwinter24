@@ -1,6 +1,11 @@
-import './Footer.css';
+import './MasterStyle.css';
+
 const Footer = () => {
-    return <h3>My Footer in another component</h3>;
-  };
-  
-  export default Footer;
+    return (
+        <footer className="footer">
+            <p className="footer-text">© Adam Currans DataRepProject24.</p>
+        </footer>
+    );
+};
+
+export default Footer;

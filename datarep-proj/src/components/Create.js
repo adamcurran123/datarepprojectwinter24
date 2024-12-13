@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './MasterStyle.css';
 
 const Create = () => {
     const [recipeName, setRecipeName] = useState('');
@@ -27,7 +28,7 @@ const Create = () => {
 
     return (
         <div>
-            <h3>Create a New Recipe</h3>
+            <h3>Post your favourite recipe!</h3>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Recipe Name:</label>
