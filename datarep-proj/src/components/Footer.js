@@ -1,5 +1,5 @@
 import './MasterStyle.css';
-
+// basic footer 
 const Footer = () => {
     return (
         <footer className="footer">

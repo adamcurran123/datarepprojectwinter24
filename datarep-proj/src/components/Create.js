@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './MasterStyle.css';
-
+//page for recipe creation
 const Create = () => {
     const [recipeName, setRecipeName] = useState('');
     const [recipeDescription, setRecipeDescription] = useState('');
@@ -21,14 +21,14 @@ const Create = () => {
                 console.log(res.data);
                 setRecipeName('');
                 setRecipeDescription('');
-                navigate('/read');
+                navigate('/recipes');
             })
             .catch((err) => {
                 console.error("Error adding recipe:", err);
                 alert('Failed to add recipe. Please try again.');
             });
     };
-
+//main text and input boxes etc
     return (
         <div>
             <h3>Post your favourite recipe!</h3>

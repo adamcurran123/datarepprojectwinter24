@@ -1,27 +1,30 @@
 import React from 'react';
-import './Content.css';
-
+import './MasterStyle.css';
+// putting together the main landing page
 const Content = () => {
   return (
     <div className="content-container">
       <h1>Welcome to Recipe Haven</h1>
-      <p>Your go-to place for delicious recipes from around the world. Whether you're a beginner or a seasoned chef, we have something for everyone!</p>
-      
-      <section className="recipe-section">
-        <h2>Featured Recipes</h2>
-        <ul>
-          <li><strong>Spaghetti Bolognese:</strong> A rich and hearty Italian classic made with ground beef, tomatoes, and herbs.</li>
-          <li><strong>Chicken Curry:</strong> A flavorful and spicy curry with tender chicken pieces, served with rice.</li>
-          <li><strong>Vegetable Stir-fry:</strong> A quick and healthy stir-fry with colorful vegetables and a savory sauce.</li>
-        </ul>
-      </section>
-      
+      <p>Your go-to place for delicious recipes. Whether you're a beginner or a seasoned chef, we have something for everyone!</p>
+
+      <div className="image-container">
+        <h2>Featured Recipes:</h2>
+        <div className="image-card">
+          <img src="/stirfry.jpg" alt="Stir Fry" className="recipe-image" />
+          <p>A healthy and quick stir-fry loaded with fresh vegetables and savory sauces.</p>
+        </div>
+        <div className="image-card">
+          <img src="/plating.jpg" alt="Plating" className="recipe-image" />
+          <p>Learn how to plate your dishes like a pro with our expert tips and techniques.</p>
+        </div>
+      </div>
+
       <section className="about-us">
         <h2>About Us</h2>
-        <p>At Recipe Haven, we believe that cooking should be fun and accessible for all. Our mission is to provide easy-to-follow recipes that anyone can enjoy, no matter their skill level.</p>
+        <p>At Recipe Haven, we're passionate about making cooking easy and enjoyable for everyone. Our recipes are designed to bring out the best in your kitchen, no matter your experience level. Join us and start creating amazing dishes today!</p>
       </section>
     </div>
   );
-}
+};
 
 export default Content;

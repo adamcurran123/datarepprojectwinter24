@@ -1,5 +1,5 @@
 import './MasterStyle.css';
-
+//header, may be implemented but not used right now(maybe delete late if still unused)
 const Header = () => {
     return (
         <header className="header">

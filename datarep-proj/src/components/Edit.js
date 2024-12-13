@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import './MasterStyle.css';
-
+// code for managing the edit function on recipes page
 const Edit = () => {
-    const { id } = useParams();  // Get the recipe ID from the URL
-    const navigate = useNavigate();  // For navigation after editing
+    const { id } = useParams(); 
+    const navigate = useNavigate(); 
     const [recipeName, setRecipeName] = useState('');
     const [recipeDescription, setRecipeDescription] = useState('');
 
-    // Fetch the recipe data to edit
+   
     useEffect(() => {
         axios.get(`http://localhost:4000/api/recipe/${id}`)
             .then((response) => {
@@ -32,7 +32,7 @@ const Edit = () => {
         axios.put(`http://localhost:4000/api/recipe/${id}`, updatedRecipe)
             .then((res) => {
                 console.log(res.data);
-                navigate('/read');  // Redirect after successful update
+                navigate('/read'); 
             })
             .catch((err) => {
                 console.error("Error updating recipe:", err);

@@ -20,7 +20,7 @@ const Read = () => {
     const handleDelete = (id) => {
         axios.delete(`http://localhost:4000/api/recipe/${id}`)
             .then((response) => {
-                setRecipes(recipes.filter(recipe => recipe._id !== id)); // Remove the deleted recipe from state
+                setRecipes(recipes.filter(recipe => recipe._id !== id));
                 alert('Recipe deleted successfully');
             })
             .catch((error) => {
@@ -29,12 +29,12 @@ const Read = () => {
     };
 
     const handleEdit = (id) => {
-        navigate(`/edit/${id}`);  // Redirect to the edit page for that recipe
+        navigate(`/edit/${id}`); 
     };
 
     return (
         <div>
-            <h3>Recipes</h3>
+            <h3>Our Favourites:</h3>
             <ul>
                 {recipes.map((recipe) => (
                     <li key={recipe._id}>
