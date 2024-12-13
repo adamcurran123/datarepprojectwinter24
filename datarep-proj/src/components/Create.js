@@ -23,7 +23,10 @@ const Create = () => {
                 setRecipeDescription('');
                 navigate('/read');
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                console.error("Error adding recipe:", err);
+                alert('Failed to add recipe. Please try again.');
+            });
     };
 
     return (

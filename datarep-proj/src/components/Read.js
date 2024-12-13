@@ -19,12 +19,16 @@ const Read = () => {
         <div>
             <h3>Recipes</h3>
             <ul>
-                {recipes.map((recipe, index) => (
-                    <li key={index}>
-                        <h4>{recipe.name}</h4>
-                        <p>{recipe.description}</p>
-                    </li>
-                ))}
+                {recipes.length > 0 ? (
+                    recipes.map((recipe, index) => (
+                        <li key={index}>
+                            <h4>{recipe.name}</h4>
+                            <p>{recipe.description}</p>
+                        </li>
+                    ))
+                ) : (
+                    <p>No recipes available. Add some!</p>
+                )}
             </ul>
         </div>
     );

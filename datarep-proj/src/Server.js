@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
@@ -10,16 +11,19 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// Handle CORS
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+// MongoDB connection string
+const dbURI = 'mongodb+srv://admin:admin24@datarepcluster.qxw0b.mongodb.net/DataRepCluster?retryWrites=true&w=majority';
 
-// In-memory storage for recipes
-let recipes = [];
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Database connected successfully'))
+    .catch((err) => console.log('Database connection error: ', err));
+
+// Recipe Schema and Model
+const recipeSchema = new mongoose.Schema({
+    name: String,
+    description: String,
+});
+const Recipe = mongoose.model('Recipe', recipeSchema);
 
 // Basic route
 app.get('/', (req, res) => {
@@ -27,20 +31,26 @@ app.get('/', (req, res) => {
 });
 
 // POST route to add a recipe
-app.post('/api/recipes', (req, res) => {
+app.post('/api/recipes', async (req, res) => {
     const { name, description } = req.body;
-    const newRecipe = { name, description };
-    recipes.push(newRecipe);
-    console.log(`Added Recipe: ${name}`);
-    res.json({ message: 'Recipe added successfully', recipe: newRecipe });
+    const newRecipe = new Recipe({ name, description });
+    await newRecipe.save();
+    res.status(201).json({ message: 'Recipe created successfully', recipe: newRecipe });
 });
 
 // GET route to retrieve all recipes
-app.get('/api/recipes', (req, res) => {
+app.get('/api/recipes', async (req, res) => {
+    const recipes = await Recipe.find({});
     res.json(recipes);
 });
 
-// Start the server
+// GET route to retrieve a recipe by ID
+app.get('/api/recipe/:id', async (req, res) => {
+    const recipe = await Recipe.findById(req.params.id);
+    res.send(recipe);
+});
+
+// Start server
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
