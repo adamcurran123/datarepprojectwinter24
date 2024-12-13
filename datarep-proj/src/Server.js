@@ -13,7 +13,6 @@ app.use(bodyParser.json());
 
 // MongoDB connection string
 const dbURI = 'mongodb+srv://admin:admin24@datarepcluster.qxw0b.mongodb.net/DataRepCluster?retryWrites=true&w=majority';
-
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Database connected successfully'))
     .catch((err) => console.log('Database connection error: ', err));
@@ -48,6 +47,37 @@ app.get('/api/recipes', async (req, res) => {
 app.get('/api/recipe/:id', async (req, res) => {
     const recipe = await Recipe.findById(req.params.id);
     res.send(recipe);
+});
+
+// PUT route to update a recipe by ID
+app.put('/api/recipe/:id', async (req, res) => {
+    try {
+        const { name, description } = req.body;
+        const updatedRecipe = await Recipe.findByIdAndUpdate(
+            req.params.id,
+            { name, description },
+            { new: true }  // Return the updated document
+        );
+        if (!updatedRecipe) {
+            return res.status(404).send('Recipe not found');
+        }
+        res.json({ message: 'Recipe updated successfully', recipe: updatedRecipe });
+    } catch (err) {
+        res.status(500).send('Error updating recipe');
+    }
+});
+
+// DELETE route to remove a recipe by ID
+app.delete('/api/recipe/:id', async (req, res) => {
+    try {
+        const recipe = await Recipe.findByIdAndDelete(req.params.id);
+        if (!recipe) {
+            return res.status(404).send('Recipe not found');
+        }
+        res.json({ message: 'Recipe deleted successfully', recipe });
+    } catch (err) {
+        res.status(500).send('Error deleting recipe');
+    }
 });
 
 // Start server
